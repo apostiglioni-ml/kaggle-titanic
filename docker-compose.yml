@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+  jupyter:
+    #    image: jupyter/scipy-notebook
+    image: jupyter
+    container_name: titanic.jupyter
+    build:
+      context: .
+      dockerfile: jupyter.dockerfile
+    ports:
+      - 8888:8888
+    volumes:
+    - type: bind
+      source: .
+      target: /home/jovyan/work
+
+  python:
+    build: .
+    image: titanic
+    container_name: titanic_learner
+    volumes:
+      - type: bind
+        source: .
+        target: /mnt
